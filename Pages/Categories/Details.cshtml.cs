@@ -28,7 +28,13 @@ namespace Nagy_Gergo_Lab2.Pages.Categories
                 return NotFound();
             }
 
-            var category = await _context.Category.FirstOrDefaultAsync(m => m.ID == id);
+            var category = await _context.Category
+                .Include(c => c.BookCategories)
+                    .ThenInclude(bc => bc.Book)
+                        .ThenInclude(b => b.Author)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.ID == id);
+
             if (category == null)
             {
                 return NotFound();

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Nagy_Gergo_Lab2.Models
 {
@@ -7,7 +8,14 @@ namespace Nagy_Gergo_Lab2.Models
         public int ID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        [NotMapped]
-        public string FullName { get => $"{FirstName} {LastName}"; set => FullName = value; }
+        [Display(Name = "Full Name")]
+        public string FullName
+        {
+            get
+            {
+                return FirstName + " " + LastName;
+            }
+        }
+        public ICollection<Book>? Books { get; set; }
     }
 }

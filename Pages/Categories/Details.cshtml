@@ -19,6 +19,35 @@
         </dd>
     </dl>
 </div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Category.BookCategories.First().Book.Title)
+            </th>
+            <th colspan="2">
+                @Html.DisplayNameFor(model => model.Category.BookCategories.First().Book.Author.FullName)
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Category.BookCategories)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Book.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Book.Author.FullName)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
 <div>
     <a asp-page="./Edit" asp-route-id="@Model.Category?.ID">Edit</a> |
     <a asp-page="./Index">Back to List</a>
